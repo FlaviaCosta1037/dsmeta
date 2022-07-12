@@ -1,25 +1,37 @@
+import { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import NotificationButton from '../notificatonButton'
-import '../SalesCard/style.css'
+import NotificationButton from '../notificatonButton';
+import '../SalesCard/style.css';
 
 function SalesCard() {
+
+    /**Criação de uma data com 1 ano atrás */
+    const min = new Date(new Date().setDate(new Date().getDate() - 365));
+
+    /**Criação de uma data com a data do dia */
+    const max = new Date();
+
+    /** Passando as datas dentro do estdado do componente*/
+    const [minDate, setMinDate] = useState(min);
+    const [maxDate, setMaxDate] = useState(max);
+
     return (
         <div className="dsmeta-card">
             <h2 className="dsmeta-sales-title">Vendas</h2>
             <div>
                 <div className="dsmeta-form-control-container">
                     <DatePicker
-                        selected={new Date()}
-                        onChange={(date: Date) => { }}
+                        selected={minDate}
+                        onChange={(date: Date) => setMinDate(date)} /**Chamando a função para alterar a data minima */
                         className="dsmeta-form-control"
                         dateFormat="dd/MM/yyyy"
                     />
                 </div>
                 <div className="dsmeta-form-control-container">
                     <DatePicker
-                        selected={new Date()}
-                        onChange={(date: Date) => { }}
+                        selected={maxDate}
+                        onChange={(date: Date) => setMaxDate(date)}/**Chamando a função para alterar a data máxima */
                         className="dsmeta-form-control"
                         dateFormat="dd/MM/yyyy"
                     />
@@ -88,4 +100,4 @@ function SalesCard() {
     )
 }
 
-export default SalesCard
+export default SalesCard;
